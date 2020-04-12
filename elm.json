@@ -1,0 +1,21 @@
+{
+    "type": "package",
+    "name": "yujota/elm-asap-pathology-format",
+    "summary": "Providing encoder/decoder for automated slide analysis platform XML format",
+    "license": "BSD-3-Clause",
+    "version": "1.0.0",
+    "exposed-modules": [
+        "AsapPathology",
+        "AsapPathology.Encode",
+        "AsapPathology.Decode"
+    ],
+    "elm-version": "0.19.0 <= v < 0.20.0",
+    "dependencies": {
+        "elm/core": "1.0.0 <= v < 2.0.0",
+        "jinjor/elm-xml-parser": "2.0.0 <= v < 3.0.0",
+        "ymtszw/elm-xml-decode": "3.2.1 <= v < 4.0.0"
+    },
+    "test-dependencies": {
+        "elm-explorations/test": "1.1.0 <= v < 2.0.0"
+    }
+}
