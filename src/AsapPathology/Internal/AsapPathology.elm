@@ -7,8 +7,11 @@ module AsapPathology.Internal.AsapPathology exposing
     , AsapPathology(..)
     , AsapPathologyRecord
     , Coordinate
-    , string2Type
+    , stringToType
+    , typeToString
     )
+
+import Color exposing (Color)
 
 
 type AsapPathology
@@ -27,7 +30,7 @@ type alias AnnotationRecord =
     { name : String
     , annotationType : AnnotationType
     , partOfGroup : String
-    , color : String
+    , color : Color
     , coordinates : List Coordinate
     }
 
@@ -38,7 +41,6 @@ type AnnotationType
     | Polygon
     | Spline
     | PointSet
-    | UndefinedType
 
 
 type alias Coordinate =
@@ -52,26 +54,45 @@ type AnnotationGroup
 type alias AnnotationGroupRecord =
     { name : String
     , partOfGroup : String
-    , color : String
+    , color : Color
     }
 
 
-string2Type : String -> AnnotationType
-string2Type str =
+stringToType : String -> Maybe AnnotationType
+stringToType str =
     if str == "Dot" then
-        Dot
+        Just Dot
 
     else if str == "Rectangle" then
-        Rectangle
+        Just Rectangle
 
     else if str == "Polygon" then
-        Polygon
+        Just Polygon
 
     else if str == "Spline" then
-        Spline
+        Just Spline
 
     else if str == "PointSet" then
-        PointSet
+        Just PointSet
 
     else
-        UndefinedType
+        Nothing
+
+
+typeToString : AnnotationType -> String
+typeToString aType =
+    case aType of
+        Dot ->
+            "Dot"
+
+        Rectangle ->
+            "Rectangle"
+
+        Polygon ->
+            "Polygon"
+
+        Spline ->
+            "Spline"
+
+        PointSet ->
+            "PointSet"

@@ -3,6 +3,7 @@ module Tests.Decode exposing (..)
 import Array exposing (Array)
 import AsapPathology.Decode as AD
 import AsapPathology.Internal.AsapPathology as A
+import Color exposing (Color)
 import Expect exposing (equal)
 import Test exposing (Test, describe, test)
 
@@ -28,7 +29,9 @@ decodeString =
                             { name = "Annotation 0"
                             , annotationType = A.Dot
                             , partOfGroup = "None"
-                            , color = "#F4FA58"
+
+                            -- , color = "#F4FA58"
+                            , color = annotationColor
                             , coordinates = [ { order = 0, x = 1173.36755, y = 766.442078 } ]
                             }
                         )
@@ -46,7 +49,7 @@ decodeString =
                             { name = "Annotation 1"
                             , annotationType = A.Polygon
                             , partOfGroup = "None"
-                            , color = "#F4FA58"
+                            , color = annotationColor
                             , coordinates =
                                 [ { order = 0, x = 659.772278, y = 1406.46069 }
                                 , { order = 1, x = 738.786926, y = 1552.63782 }
@@ -99,6 +102,11 @@ decodeString =
         , test "test point set annotation" checkPointSetAnnotation
         , test "test rectangle annotation" checkRectangleAnnotation
         ]
+
+
+annotationColor : Color
+annotationColor =
+    Color.rgb255 244 250 88
 
 
 sampleXml : String

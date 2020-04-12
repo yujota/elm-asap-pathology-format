@@ -1,6 +1,7 @@
 module AsapPathology.Annotation exposing (name, setName)
 
 import AsapPathology.Internal.AsapPathology as A exposing (Annotation)
+import Color exposing (Color)
 
 
 type alias AnnotationType =
@@ -11,7 +12,7 @@ type alias Coordinate =
     { order : Int, x : Float, y : Float }
 
 
-dot : { name : String, partOfGroup : String, color : String, x : Float, y : Float } -> Annotation
+dot : { name : String, partOfGroup : String, color : Color, x : Float, y : Float } -> Annotation
 dot r =
     Annotation
         { name = r.name
@@ -35,7 +36,7 @@ isDot (Annotation a) =
 rectangle :
     { name : String
     , partOfGroup : String
-    , color : String
+    , color : Color
     , x0 : Float
     , y0 : Float
     , x1 : Float
@@ -71,7 +72,7 @@ isRectangle (Annotation a) =
             False
 
 
-polygon : { name : String, partOfGroup : String, color : String, coordinates : List Coordinate } -> Annotation
+polygon : { name : String, partOfGroup : String, color : Color, coordinates : List Coordinate } -> Annotation
 polygon r =
     Annotation
         { name = r.name
@@ -92,7 +93,7 @@ isPolygon (Annotation a) =
             False
 
 
-spline : { name : String, partOfGroup : String, color : String, coordinates : List Coordinate } -> Annotation
+spline : { name : String, partOfGroup : String, color : Color, coordinates : List Coordinate } -> Annotation
 spline r =
     Annotation
         { name = r.name
@@ -113,7 +114,7 @@ isSpline (Annotation a) =
             False
 
 
-pointSet : { name : String, partOfGroup : String, color : String, coordinates : List Coordinate } -> Annotation
+pointSet : { name : String, partOfGroup : String, color : Color, coordinates : List Coordinate } -> Annotation
 pointSet r =
     Annotation
         { name = r.name
@@ -154,12 +155,12 @@ setPartOfGroup p (Annotation a) =
     Annotation { a | partOfGroup = p }
 
 
-color : Annotation -> String
+color : Annotation -> Color
 color (Annotation a) =
     a.color
 
 
-setColor : String -> Annotation -> Annotation
+setColor : Color -> Annotation -> Annotation
 setColor c (Annotation a) =
     Annotation { a | color = c }
 
