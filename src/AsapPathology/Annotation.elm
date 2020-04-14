@@ -1,7 +1,30 @@
-module AsapPathology.Annotation exposing (name, setName)
+module AsapPathology.Annotation exposing
+    ( color
+    , coordinates
+    , dot
+    , isDot
+    , isPointSet
+    , isPolygon
+    , isRectangle
+    , isSpline
+    , name
+    , partOfGroup
+    , pointSet
+    , polygon
+    , rectangle
+    , setColor
+    , setName
+    , setPartOfGroup
+    , spline
+    , typeAsString
+    )
 
-import AsapPathology.Internal.AsapPathology as A exposing (Annotation)
+import AsapPathology.Internal.AsapPathology as A
 import Color exposing (Color)
+
+
+type alias Annotation =
+    A.Annotation
 
 
 type alias AnnotationType =
@@ -14,7 +37,7 @@ type alias Coordinate =
 
 dot : { name : String, partOfGroup : String, color : Color, x : Float, y : Float } -> Annotation
 dot r =
-    Annotation
+    A.Annotation
         { name = r.name
         , annotationType = A.Dot
         , partOfGroup = r.partOfGroup
@@ -24,7 +47,7 @@ dot r =
 
 
 isDot : Annotation -> Bool
-isDot (Annotation a) =
+isDot (A.Annotation a) =
     case a.annotationType of
         A.Dot ->
             True
@@ -48,7 +71,7 @@ rectangle :
     }
     -> Annotation
 rectangle r =
-    Annotation
+    A.Annotation
         { name = r.name
         , annotationType = A.Rectangle
         , partOfGroup = r.partOfGroup
@@ -63,7 +86,7 @@ rectangle r =
 
 
 isRectangle : Annotation -> Bool
-isRectangle (Annotation a) =
+isRectangle (A.Annotation a) =
     case a.annotationType of
         A.Rectangle ->
             True
@@ -74,7 +97,7 @@ isRectangle (Annotation a) =
 
 polygon : { name : String, partOfGroup : String, color : Color, coordinates : List Coordinate } -> Annotation
 polygon r =
-    Annotation
+    A.Annotation
         { name = r.name
         , annotationType = A.Polygon
         , partOfGroup = r.partOfGroup
@@ -84,7 +107,7 @@ polygon r =
 
 
 isPolygon : Annotation -> Bool
-isPolygon (Annotation a) =
+isPolygon (A.Annotation a) =
     case a.annotationType of
         A.Polygon ->
             True
@@ -95,7 +118,7 @@ isPolygon (Annotation a) =
 
 spline : { name : String, partOfGroup : String, color : Color, coordinates : List Coordinate } -> Annotation
 spline r =
-    Annotation
+    A.Annotation
         { name = r.name
         , annotationType = A.Spline
         , partOfGroup = r.partOfGroup
@@ -105,7 +128,7 @@ spline r =
 
 
 isSpline : Annotation -> Bool
-isSpline (Annotation a) =
+isSpline (A.Annotation a) =
     case a.annotationType of
         A.Spline ->
             True
@@ -116,7 +139,7 @@ isSpline (Annotation a) =
 
 pointSet : { name : String, partOfGroup : String, color : Color, coordinates : List Coordinate } -> Annotation
 pointSet r =
-    Annotation
+    A.Annotation
         { name = r.name
         , annotationType = A.PointSet
         , partOfGroup = r.partOfGroup
@@ -126,7 +149,7 @@ pointSet r =
 
 
 isPointSet : Annotation -> Bool
-isPointSet (Annotation a) =
+isPointSet (A.Annotation a) =
     case a.annotationType of
         A.PointSet ->
             True
@@ -136,40 +159,45 @@ isPointSet (Annotation a) =
 
 
 name : Annotation -> String
-name (Annotation a) =
+name (A.Annotation a) =
     a.name
 
 
 setName : String -> Annotation -> Annotation
-setName n (Annotation a) =
-    Annotation { a | name = n }
+setName n (A.Annotation a) =
+    A.Annotation { a | name = n }
 
 
 partOfGroup : Annotation -> String
-partOfGroup (Annotation a) =
+partOfGroup (A.Annotation a) =
     a.partOfGroup
 
 
 setPartOfGroup : String -> Annotation -> Annotation
-setPartOfGroup p (Annotation a) =
-    Annotation { a | partOfGroup = p }
+setPartOfGroup p (A.Annotation a) =
+    A.Annotation { a | partOfGroup = p }
 
 
 color : Annotation -> Color
-color (Annotation a) =
+color (A.Annotation a) =
     a.color
 
 
 setColor : Color -> Annotation -> Annotation
-setColor c (Annotation a) =
-    Annotation { a | color = c }
+setColor c (A.Annotation a) =
+    A.Annotation { a | color = c }
 
 
 coordinates : Annotation -> List { order : Int, x : Float, y : Float }
-coordinates (Annotation a) =
+coordinates (A.Annotation a) =
     a.coordinates
 
 
 setCoordinates : List { order : Int, x : Float, y : Float } -> Annotation -> Annotation
-setCoordinates cs (Annotation a) =
-    Annotation { a | coordinates = cs }
+setCoordinates cs (A.Annotation a) =
+    A.Annotation { a | coordinates = cs }
+
+
+typeAsString : Annotation -> String
+typeAsString (A.Annotation a) =
+    A.typeToString a.annotationType

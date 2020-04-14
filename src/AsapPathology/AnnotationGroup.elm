@@ -1,34 +1,38 @@
 module AsapPathology.AnnotationGroup exposing (color, name, partOfGroup, setColor, setName, setPartOfGroup)
 
-import AsapPathology.Internal.AsapPathology exposing (Annotation)
+import AsapPathology.Internal.AsapPathology as A
 import Color exposing (Color)
 
 
-name : Annotation -> String
-name (Annotation a) =
+type alias AnnotationGroup =
+    A.AnnotationGroup
+
+
+name : AnnotationGroup -> String
+name (A.AnnotationGroup a) =
     a.name
 
 
-setName : String -> Annotation -> Annotation
-setName n (Annotation a) =
-    Annotation { a | name = n }
+setName : String -> AnnotationGroup -> AnnotationGroup
+setName n (A.AnnotationGroup a) =
+    A.AnnotationGroup { a | name = n }
 
 
-partOfGroup : Annotation -> String
-partOfGroup (Annotation a) =
+partOfGroup : AnnotationGroup -> String
+partOfGroup (A.AnnotationGroup a) =
     a.partOfGroup
 
 
-setPartOfGroup : String -> Annotation -> Annotation
-setPartOfGroup p (Annotation a) =
-    Annotation { a | partOfGroup = p }
+setPartOfGroup : String -> AnnotationGroup -> AnnotationGroup
+setPartOfGroup p (A.AnnotationGroup a) =
+    A.AnnotationGroup { a | partOfGroup = p }
 
 
-color : Annotation -> Color
-color (Annotation a) =
+color : AnnotationGroup -> Color
+color (A.AnnotationGroup a) =
     a.color
 
 
-setColor : Color -> Annotation -> Annotation
-setColor c (Annotation a) =
-    Annotation { a | color = c }
+setColor : Color -> AnnotationGroup -> AnnotationGroup
+setColor c (A.AnnotationGroup a) =
+    A.AnnotationGroup { a | color = c }
