@@ -1,11 +1,42 @@
 module AsapPathology.Decode exposing (decodeString)
 
+{-| Decoder for ASAP XML format.
+
+
+# Decoder
+
+@docs decodeString
+
+-}
+
 import AsapPathology.Internal.AsapPathology as A exposing (AsapPathology)
 import Color exposing (Color)
 import Color.Convert
 import Xml.Decode as XD
 
 
+{-| Decode ASAP XML format to `AsapPathology`.
+
+    xmlString =
+        """
+        <?xml version="1.0"?>
+        <ASAP_Annotations>
+            <Annotations>
+                <Annotation Name="Annotation 0" Type="Dot" PartOfGroup="None" Color="#FFFFFF">
+                    <Coordinates>
+                        <Coordinate Order="0" X="100" Y="200" />
+                    </Coordinates>
+                </Annotation>
+            </Annotations>
+            <AnnotationGroups></AnnotationGroups>
+        </ASAP_Annotations>
+        """
+
+    decoded = decodeString xmlString
+    Result.map AsapPathology.annotations decoded
+        == Ok [ Annotation.dot { name = "Sample", partOfGroup = "None", color = Color.white, x = 100, y = 200 } ]
+
+-}
 decodeString : String -> Result String AsapPathology
 decodeString =
     XD.decodeString asapPathologyDecoder

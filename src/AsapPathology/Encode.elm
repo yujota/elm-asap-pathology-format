@@ -1,13 +1,31 @@
-module AsapPathology.Encode exposing (..)
+module AsapPathology.Encode exposing (format)
+
+{-| Encoder for ASAP XML format
+
+
+# Encoder
+
+@docs format
+
+-}
 
 import AsapPathology.Internal.AsapPathology as A exposing (AsapPathology)
 import Color.Convert
 import XmlParser as XP
 
 
+{-| Encode `AsapPathology` to XML.
+
+    data =
+        AsapPathology.asapPathology { annotations = [], annotationGroups = [] }
+
+    format data
+        == """<?xml version="1.0"?><ASAP_Annotations ><Annotations ></Annotations><AnnotationGroups ></AnnotationGroups></ASAP_Annotations>"""
+
+-}
 format : AsapPathology -> String
 format (A.AsapPathology r) =
-    { processingInstructions = []
+    { processingInstructions = [ { name = "xml version", value = "1.0" } ]
     , docType = Nothing
     , root =
         XP.Element "ASAP_Annotations"

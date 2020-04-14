@@ -6,6 +6,8 @@
     "version": "1.0.0",
     "exposed-modules": [
         "AsapPathology",
+        "AsapPathology.Annotation",
+        "AsapPathology.AnnotationGroup",
         "AsapPathology.Encode",
         "AsapPathology.Decode"
     ],
