@@ -62,10 +62,10 @@ update msg model =
         FileLoaded str ->
             case AD.decodeString str of
                 Ok data ->
-                    ( { model | status = Debug.log "data" data |> Parsed }, Cmd.none )
+                    ( { model | status = data |> Parsed }, Cmd.none )
 
                 Err error ->
-                    ( { model | status = Debug.log "error" error |> ParseError }, Cmd.none )
+                    ( { model | status = error |> ParseError }, Cmd.none )
 
         RequestDownload ->
             case ( model.status, model.fileName ) of
